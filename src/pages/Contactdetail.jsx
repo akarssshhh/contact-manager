@@ -1,14 +1,17 @@
 import { Link, useParams } from "react-router-dom";
 
 const ContactDetail = ({ contacts }) => {
+  // M5 - Get ID from URL
 
   const { id } = useParams();
 
-  // Find one contact using the URL ID
+  // M5 - Find selected contact
 
   const contact = contacts.find(
     (contact) => contact.id === Number(id)
   );
+
+  // M5 - Handle wrong contact ID
 
   if (!contact) {
     return (
@@ -26,8 +29,6 @@ const ContactDetail = ({ contacts }) => {
       </div>
     );
   }
-
-  // M5 - Show selected contact details
 
   return (
     <div className="max-w-xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
@@ -50,9 +51,16 @@ const ContactDetail = ({ contacts }) => {
         {contact.phone}
       </p>
 
-      <p className="mb-5">
+      <p className="mb-3">
         <span className="font-bold">City:</span>{" "}
         {contact.city}
+      </p>
+
+      {/* M5 Bonus - Show favorite status */}
+
+      <p className="mb-5">
+        <span className="font-bold">Favorite:</span>{" "}
+        {contact.favorite ? "Yes ★" : "No ☆"}
       </p>
 
       <Link

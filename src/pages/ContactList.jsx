@@ -1,22 +1,37 @@
 import { useState } from "react";
 import ContactCard from "../components/ContactCard";
 
-const ContactList = ({ contacts, onDelete }) => {
-  // M5 - Store search text
+const ContactList = ({
+  contacts,
+  onDelete,
+  onToggleFavorite,
+}) => {
+  // M5 - Store text typed in the search box
 
   const [searchText, setSearchText] = useState("");
 
-  // M5 - Filter contacts using name or email
+  // M5 Bonus - Store favorite-filter status
 
-  const filteredContacts = contacts.filter(
-    (contact) =>
+  const [showFavoritesOnly, setShowFavoritesOnly] =
+    useState(false);
+
+  // M5 - Search by name or email
+  // M5 Bonus - Show only favorite contacts when selected
+
+  const filteredContacts = contacts.filter((contact) => {
+    const matchesSearch =
       contact.name
         .toLowerCase()
         .includes(searchText.toLowerCase()) ||
       contact.email
         .toLowerCase()
-        .includes(searchText.toLowerCase())
-  );
+        .includes(searchText.toLowerCase());
+
+    const matchesFavorite =
+      !showFavoritesOnly || contact.favorite;
+
+    return matchesSearch && matchesFavorite;
+  });
 
   return (
     <div className="max-w-5xl mx-auto mt-10 p-6">
@@ -24,15 +39,28 @@ const ContactList = ({ contacts, onDelete }) => {
         Contact List
       </h1>
 
-      {/* M5 - Search Input */}
+      {/* M5 - Search box */}
 
       <input
         type="text"
         placeholder="Search by name or email"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
-        className="w-full border p-3 rounded mb-6"
+        className="w-full border p-3 rounded mb-4"
       />
+
+      {/* M5 Bonus - Favorite filter button */}
+
+      <button
+        onClick={() =>
+          setShowFavoritesOnly(!showFavoritesOnly)
+        }
+        className="mb-6 bg-yellow-400 text-black px-4 py-2 rounded"
+      >
+        {showFavoritesOnly
+          ? "Show All Contacts"
+          : "Show Favorites Only"}
+      </button>
 
       {contacts.length === 0 ? (
         <p>No contacts yet.</p>
@@ -45,6 +73,7 @@ const ContactList = ({ contacts, onDelete }) => {
               key={contact.id}
               contact={contact}
               onDelete={onDelete}
+              onToggleFavorite={onToggleFavorite}
             />
           ))}
         </div>

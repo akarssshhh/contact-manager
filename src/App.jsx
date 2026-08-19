@@ -14,6 +14,7 @@ function App() {
       email: "aarav@mail.com",
       phone: "9876543210",
       city: "Pune",
+      favorite: false,
     },
     {
       id: 2,
@@ -21,6 +22,7 @@ function App() {
       email: "riya@mail.com",
       phone: "9876543211",
       city: "Mumbai",
+      favorite: true,
     },
     {
       id: 3,
@@ -28,6 +30,7 @@ function App() {
       email: "rahul@mail.com",
       phone: "9876543212",
       city: "Delhi",
+      favorite: false,
     },
     {
       id: 4,
@@ -35,20 +38,22 @@ function App() {
       email: "sneha@mail.com",
       phone: "9876543213",
       city: "Ahmedabad",
+      favorite: false,
     },
   ]);
 
   // M3 - Add Contact
 
   const addContact = (newContact) => {
-    const ContactwithId = {
+    const contactWithId = {
       ...newContact,
       id: Date.now(),
+      favorite: false,
     };
 
     setContacts((previousContacts) => [
       ...previousContacts,
-      ContactwithId,
+      contactWithId,
     ]);
   };
 
@@ -58,7 +63,7 @@ function App() {
     setContacts((previousContacts) =>
       previousContacts.map((contact) =>
         contact.id === updatedContact.id
-          ? updatedContact
+          ? { ...contact, ...updatedContact }
           : contact
       )
     );
@@ -70,6 +75,21 @@ function App() {
     setContacts((previousContacts) =>
       previousContacts.filter(
         (contact) => contact.id !== id
+      )
+    );
+  };
+
+  // M5 Bonus - Add or remove favorite status
+
+  const toggleFavorite = (id) => {
+    setContacts((previousContacts) =>
+      previousContacts.map((contact) =>
+        contact.id === id
+          ? {
+              ...contact,
+              favorite: !contact.favorite,
+            }
+          : contact
       )
     );
   };
@@ -87,6 +107,7 @@ function App() {
             <ContactList
               contacts={contacts}
               onDelete={deleteContact}
+              onToggleFavorite={toggleFavorite}
             />
           }
         />
@@ -119,9 +140,7 @@ function App() {
         <Route
           path="/contact/:id"
           element={
-            <ContactDetail
-              contacts={contacts}
-            />
+            <ContactDetail contacts={contacts} />
           }
         />
       </Routes>
