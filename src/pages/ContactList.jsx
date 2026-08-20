@@ -7,30 +7,41 @@ const ContactList = ({
   onToggleFavorite,
 }) => {
   // M5 - Store text typed in the search box
-
   const [searchText, setSearchText] = useState("");
 
   // M5 Bonus - Store favorite-filter status
-
-  const [showFavoritesOnly, setShowFavoritesOnly] =
-    useState(false);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
   // M5 - Search by name or email
   // M5 Bonus - Show only favorite contacts when selected
-
   const filteredContacts = contacts.filter((contact) => {
-    const matchesSearch =
+    let searchMatches;
+
+    if (
       contact.name
         .toLowerCase()
-        .includes(searchText.toLowerCase()) ||
+        .includes(searchText.toLowerCase())
+    ) {
+      searchMatches = true;
+    } else if (
       contact.email
         .toLowerCase()
-        .includes(searchText.toLowerCase());
+        .includes(searchText.toLowerCase())
+    ) {
+      searchMatches = true;
+    } else {
+      searchMatches = false;
+    }
 
-    const matchesFavorite =
-      !showFavoritesOnly || contact.favorite;
+    let favoriteMatches;
 
-    return matchesSearch && matchesFavorite;
+    if (showFavoritesOnly) {
+      favoriteMatches = contact.favorite;
+    } else {
+      favoriteMatches = true;
+    }
+
+    return searchMatches && favoriteMatches;
   });
 
   return (
@@ -40,7 +51,6 @@ const ContactList = ({
       </h1>
 
       {/* M5 - Search box */}
-
       <input
         type="text"
         placeholder="Search by name or email"
@@ -50,7 +60,6 @@ const ContactList = ({
       />
 
       {/* M5 Bonus - Favorite filter button */}
-
       <button
         onClick={() =>
           setShowFavoritesOnly(!showFavoritesOnly)
