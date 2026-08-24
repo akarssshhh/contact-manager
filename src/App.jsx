@@ -47,7 +47,9 @@ function App() {
   const addContact = (newContact) => {
     const contactWithId = {
       ...newContact,
-      id: Date.now(),
+      id: contacts.length > 0
+        ? Math.max(...contacts.map((contact) => contact.id)) + 1
+        : 1,
       favorite: false,
     };
 
