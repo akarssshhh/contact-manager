@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
@@ -6,92 +6,140 @@ import ContactList from "./pages/ContactList";
 import ContactDetail from "./pages/Contactdetail";
 import ContactForm from "./pages/ContactForm";
 
+const API_URL = "http://127.0.0.1:5000/api/contacts";
+
 function App() {
-  const [contacts, setContacts] = useState([
-    {
-      id: 1,
-      name: "Aarav Shah",
-      email: "aarav@mail.com",
-      phone: "9876543210",
-      city: "Pune",
-      favorite: false,
-    },
-    {
-      id: 2,
-      name: "Riya Sharma",
-      email: "riya@mail.com",
-      phone: "9876543211",
-      city: "Mumbai",
-      favorite: true,
-    },
-    {
-      id: 3,
-      name: "Rahul Verma",
-      email: "rahul@mail.com",
-      phone: "9876543212",
-      city: "Delhi",
-      favorite: false,
-    },
-    {
-      id: 4,
-      name: "Sneha Patel",
-      email: "sneha@mail.com",
-      phone: "9876543213",
-      city: "Ahmedabad",
-      favorite: false,
-    },
-  ]);
+  const [contacts, setContacts] = useState([]);
 
-  // M3 - Add Contact
+  // Get contacts from backend
+  useEffect(() => {
+    const fetchContacts = async () => {
+      try {
+        const response = await fetch(API_URL);
 
-  const addContact = (newContact) => {
-    const contactWithId = {
-      ...newContact,
-      id: Date.now(),
-      favorite: false,
+        if (!response.ok) {
+          throw new Error("Failed to fetch contacts");
+        }
+
+        const data = await response.json();
+
+        setContacts(data);
+      } catch (error) {
+        console.error("Error fetching contacts:", error);
+      }
     };
 
-    setContacts((previousContacts) => [
-      ...previousContacts,
-      contactWithId,
-    ]);
+    fetchContacts();
+  }, []);
+
+  // M3 - Add Contact
+  const addContact = async (newContact) => {
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newContact),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add contact");
+      }
+
+      const contactWithId = await response.json();
+
+      setContacts((previousContacts) => [
+        ...previousContacts,
+        contactWithId,
+      ]);
+    } catch (error) {
+      console.error("Error adding contact:", error);
+    }
   };
 
   // M4 - Update Contact
+  const updateContact = async (updatedContact) => {
+    try {
+      const response = await fetch(
+        `${API_URL}/${updatedContact.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedContact),
+        }
+      );
 
-  const updateContact = (updatedContact) => {
-    setContacts((previousContacts) =>
-      previousContacts.map((contact) =>
-        contact.id === updatedContact.id
-          ? { ...contact, ...updatedContact }
-          : contact
-      )
-    );
+      if (!response.ok) {
+        throw new Error("Failed to update contact");
+      }
+
+      const savedContact = await response.json();
+
+      setContacts((previousContacts) =>
+        previousContacts.map((contact) =>
+          contact.id === savedContact.id
+            ? savedContact
+            : contact
+        )
+      );
+    } catch (error) {
+      console.error("Error updating contact:", error);
+    }
   };
 
   // M4 - Delete Contact
+  const deleteContact = async (id) => {
+    try {
+      const response = await fetch(
+        `${API_URL}/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
-  const deleteContact = (id) => {
-    setContacts((previousContacts) =>
-      previousContacts.filter(
-        (contact) => contact.id !== id
-      )
-    );
+      if (!response.ok) {
+        throw new Error("Failed to delete contact");
+      }
+
+      setContacts((previousContacts) =>
+        previousContacts.filter(
+          (contact) => contact.id !== id
+        )
+      );
+    } catch (error) {
+      console.error("Error deleting contact:", error);
+    }
   };
 
-  // M5 Bonus - Add or remove favorite status
+  // M5 Bonus - Toggle Favorite
+  const toggleFavorite = async (id) => {
+    try {
+      const response = await fetch(
+        `${API_URL}/${id}/favorite`,
+        {
+          method: "PATCH",
+        }
+      );
 
-  const toggleFavorite = (id) => {
-    setContacts((previousContacts) =>
-      previousContacts.map((contact) =>
-        contact.id === id
-          ? {
-              ...contact,
-              favorite: !contact.favorite,
-            }
-          : contact
-      )
-    );
+      if (!response.ok) {
+        throw new Error("Failed to update favorite");
+      }
+
+      const updatedContact = await response.json();
+
+      setContacts((previousContacts) =>
+        previousContacts.map((contact) =>
+          contact.id === updatedContact.id
+            ? updatedContact
+            : contact
+        )
+      );
+    } catch (error) {
+      console.error("Error updating favorite:", error);
+    }
   };
 
   return (
@@ -140,7 +188,9 @@ function App() {
         <Route
           path="/contact/:id"
           element={
-            <ContactDetail contacts={contacts} />
+            <ContactDetail
+              contacts={contacts}
+            />
           }
         />
       </Routes>

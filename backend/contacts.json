@@ -1,0 +1,178 @@
+[
+  {
+    "id": 1,
+    "name": "Akarsh Kumar",
+    "email": "akarsh@gmail.com",
+    "phone": "9876543210",
+    "city": "Patnaa",
+    "favorite": false
+  },
+  {
+    "id": 2,
+    "name": "Riya Sharma",
+    "email": "riya@mail.com",
+    "phone": "9876543211",
+    "city": "Mumbai",
+    "favorite": true
+  },
+  {
+    "id": 3,
+    "name": "Rahul Verma",
+    "email": "rahul@mail.com",
+    "phone": "9876543212",
+    "city": "Delhi",
+    "favorite": false
+  },
+  {
+    "id": 4,
+    "name": "Sneha Patel",
+    "email": "sneha@mail.com",
+    "phone": "9876543213",
+    "city": "Ahmedabad",
+    "favorite": false
+  },
+  {
+    "id": 5,
+    "name": "Amit Singh",
+    "email": "amit.singh@gmail.com",
+    "phone": "9876543214",
+    "city": "Pune",
+    "favorite": true
+  },
+  {
+    "id": 6,
+    "name": "Priya Mehta",
+    "email": "priya.mehta@gmail.com",
+    "phone": "9876543215",
+    "city": "Bangalore",
+    "favorite": false
+  },
+  {
+    "id": 7,
+    "name": "Rohan Gupta",
+    "email": "rohan.gupta@gmail.com",
+    "phone": "9876543216",
+    "city": "Kolkata",
+    "favorite": false
+  },
+  {
+    "id": 8,
+    "name": "Neha Agarwal",
+    "email": "neha.agarwal@gmail.com",
+    "phone": "9876543217",
+    "city": "Jaipur",
+    "favorite": true
+  },
+  {
+    "id": 9,
+    "name": "Vikas Yadav",
+    "email": "vikas.yadav@gmail.com",
+    "phone": "9876543218",
+    "city": "Lucknow",
+    "favorite": false
+  },
+  {
+    "id": 10,
+    "name": "Anjali Mishra",
+    "email": "anjali.mishra@gmail.com",
+    "phone": "9876543219",
+    "city": "Varanasi",
+    "favorite": false
+  },
+  {
+    "id": 11,
+    "name": "Karan Malhotra",
+    "email": "karan.malhotra@gmail.com",
+    "phone": "9876543220",
+    "city": "Chandigarh",
+    "favorite": true
+  },
+  {
+    "id": 12,
+    "name": "Pooja Shah",
+    "email": "pooja.shah@gmail.com",
+    "phone": "9876543221",
+    "city": "Surat",
+    "favorite": false
+  },
+  {
+    "id": 13,
+    "name": "Sahil Khan",
+    "email": "sahil.khan@gmail.com",
+    "phone": "9876543222",
+    "city": "Hyderabad",
+    "favorite": false
+  },
+  {
+    "id": 14,
+    "name": "Kavya Nair",
+    "email": "kavya.nair@gmail.com",
+    "phone": "9876543223",
+    "city": "Kochi",
+    "favorite": true
+  },
+  {
+    "id": 15,
+    "name": "Arjun Kapoor",
+    "email": "arjun.kapoor@gmail.com",
+    "phone": "9876543224",
+    "city": "Gurgaon",
+    "favorite": false
+  },
+  {
+    "id": 16,
+    "name": "Meera Joshi",
+    "email": "meera.joshi@gmail.com",
+    "phone": "9876543225",
+    "city": "Nagpur",
+    "favorite": false
+  },
+  {
+    "id": 17,
+    "name": "Nikhil Jain",
+    "email": "nikhil.jain@gmail.com",
+    "phone": "9876543226",
+    "city": "Indore",
+    "favorite": true
+  },
+  {
+    "id": 18,
+    "name": "Simran Kaur",
+    "email": "simran.kaur@gmail.com",
+    "phone": "9876543227",
+    "city": "Amritsar",
+    "favorite": false
+  },
+  {
+    "id": 19,
+    "name": "Varun Reddy",
+    "email": "varun.reddy@gmail.com",
+    "phone": "9876543228",
+    "city": "Chennai",
+    "favorite": false
+  },
+  {
+    "id": 20,
+    "name": "Isha Kapoor",
+    "email": "isha.kapoor@gmail.com",
+    "phone": "9876543229",
+    "city": "Noida",
+    "favorite": true
+  },
+  {
+    "id": 21,
+    "name": "Akarsh Kumar",
+    "email": "akarsh.dab@gmail.com",
+    "phone": "7519901649",
+    "city": "delhi",
+    "favorite": false
+  },
+  {
+    "id": 22,
+    "name": "demotwo",
+    "email": "demo@gmail.com",
+    "phone": "7484847448",
+    "city": "delhi",
+    "favorite": false
+  }
+]
